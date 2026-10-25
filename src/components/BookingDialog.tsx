@@ -77,7 +77,7 @@ export default function BookingDialog({ film, onConfirm, onClose }: BookingDialo
           <p className="demo-note">Démonstration : aucun billet réel ni envoi de courriel.</p>
 
           {errorsLeft.length > 0 && (
-            <div ref={summaryRef} tabIndex={-1} className="error-summary" aria-labelledby={id("summary-title")} aria-describedby={id("summary-help")}>
+            <div role="region" ref={summaryRef} tabIndex={-1} className="error-summary" aria-labelledby={id("summary-title")} aria-describedby={id("summary-help")}>
               <h3 id={id("summary-title")}>{errorsLeft.length} erreur{errorsLeft.length > 1 ? "s empêchent" : " empêche"} la réservation</h3>
               <ul>
                 {errorsLeft.map(({ key, label }) => (
