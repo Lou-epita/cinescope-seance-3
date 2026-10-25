@@ -373,6 +373,15 @@ input.invalid {
     color: #7c1420;
 }
 
+.error-summary ul {
+    margin: .5rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.error-summary li + li {
+    margin-top: .5rem;
+}
+
 .demo-note {
     color: #50586a;
     font-size: .95rem;
