@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import type { Film } from "../films";
 import { readReservation, type Errors, type Reservation } from "../reservation";
 
@@ -52,6 +52,14 @@ export default function BookingDialog({ film, onConfirm, onClose }: BookingDialo
     closeBooking();
   };
 
+  const joinField = (event: MouseEvent<HTMLAnchorElement>, key: keyof Errors) => {
+    event.preventDefault();
+    const target = key === "tariff"
+      ? formRef.current?.querySelector<HTMLInputElement>('input[name="tariff"]')
+      : formRef.current?.elements.namedItem(key) as HTMLInputElement | null;
+    target?.focus();
+  };
+
   return (
     <dialog ref={dialogRef} aria-labelledby={id("title")} onClose={onClose}>
       <div className="dialog-heading">
@@ -74,7 +82,7 @@ export default function BookingDialog({ film, onConfirm, onClose }: BookingDialo
               <ul>
                 {errorsLeft.map(({ key, label }) => (
                   <li key={key}>
-                    <a id="error-link" href={key}>{errors[key]}</a>
+                    <a id={id(`error-link-${key}`)} href={`#${id(key)}`} onClick={(event) => joinField(event, key)}>{errors[key]}</a>
                   </li>
                 ))}
               </ul>
